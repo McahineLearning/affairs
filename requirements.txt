@@ -1,0 +1,10 @@
+jupyter
+pandas
+pandas-profiling
+sklearn
+statsmodels
+numpy
+matplotlib
+seaborn
+flask
+dvc
