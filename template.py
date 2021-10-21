@@ -19,6 +19,7 @@ files = [
 
     ".gitignore",
     os.path.join('src', '__init__.py'),
+    os.path.join('src', 'make_data.py')
 
 
 ]
