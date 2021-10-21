@@ -25,7 +25,8 @@ files = [
     "tox.ini",
     os.path.join('tests', 'test.py'),
     os.path.join('tests', 'test_config.py'),
-    os.path.join('tests', '__init__.py')
+    os.path.join('tests', '__init__.py'),
+    os.path.join('tests', 'conftest.py')
 
 
 ]
