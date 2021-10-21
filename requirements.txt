@@ -1,3 +1,4 @@
+-e .
 jupyter
 pandas
 pandas-profiling

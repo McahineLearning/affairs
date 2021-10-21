@@ -6,8 +6,9 @@ dirs = [
     'data_given',
     'notebooks',
     'saved_models',
-    'src'
-    'report'
+    'src',
+    'report',
+    'tests'
 ]
 
 
@@ -17,10 +18,14 @@ for dir_ in dirs:
         pass
 
 files = [
-
+    "setup.py",
     ".gitignore",
     os.path.join('src', '__init__.py'),
-    os.path.join('src', 'make_data.py')
+    os.path.join('src', 'make_data.py'),
+    "tox.ini",
+    os.path.join('tests', 'test.py'),
+    os.path.join('tests', 'test_config.py'),
+    os.path.join('tests', '__init__.py')
 
 
 ]
