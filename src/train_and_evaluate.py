@@ -3,20 +3,57 @@ import warnings
 import sys
 import pandas as pd
 import numpy as np
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import ElasticNet
 from get_data import read_params
 import argparse
 import joblib
 import json
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import roc_auc_score
+from sklearn.metrics import f1_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import precision_score
+from sklearn.model_selection import cross_val_score
+from sklearn.metrics import confusion_matrix
 
 
 def eval_metrics(actual, pred):
-    rmse = np.sqrt(mean_squared_error(actual, pred))
-    mae = mean_absolute_error(actual, pred)
-    r2 = r2_score(actual, pred)
-    return rmse, mae, r2
+
+    accuracy = accuracy_score(test_y, predicted_qualities)*100
+    f1_score_macro = f1_score(test_y, predicted_qualities, average='macro')
+    f1_score_micro = f1_score(test_y, predicted_qualities, average='micro')
+    f1_score_weighted = f1_score(test_y, predicted_qualities, average='weighted')
+    roc_auc_score_macro = roc_auc_score(test_y, predicted_qualities,average='macro')
+    roc_auc_score_macro = roc_auc_score(test_y, predicted_qualities,average='micro')
+    roc_auc_score_weighted = roc_auc_score(test_y, predicted_qualities,average='weighted')
+    precision = precision_score(test_y, predicted_qualities)
+    recall_score = recall_score(test_y, predicted_qualities)
+    error = 100-(accuracy_score(test_y, predicted_qualities)*100)
+    clf_report = metrics.classification_report(test_y, predicted_qualities)
+
+    CM = confusion_matrix(test_y ,predicted_qualities)
+    TN = CM[0][0]
+    FN = CM[1][0]
+    TP = CM[1][1]
+    FP = CM[0][1]
+    # true positive rate
+    TPR = TP/(TP+FN)
+    # Specificity or true negative rate
+    TNR = TN/(TN+FP) 
+    # Fall out or false positive rate
+    FPR = FP/(FP+TN)
+    # False negative rate
+    FNR = FN/(TP+FN)
+
+
+    print("TPR is", TPR)
+    print("TNR is", TNR)
+    print("FPR is", FPR)
+    print("FNR is", FNR)
+
+    return accuracy, f1_score_macro, f1_score_micro, f1_score_weighted, roc_auc_score_macro, roc_auc_score_micro, roc_auc_score_weighted, precision, recall_score, error, clf_report, TPR, TNR, FNR
 
 def train_and_evaluate(config_path):
     config = read_params(config_path)
@@ -27,10 +64,12 @@ def train_and_evaluate(config_path):
 
     
 
-    alpha = config["estimators"]["ElasticNet"]["params"]["alpha"]
-    l1_ratio = config["estimators"]["ElasticNet"]["params"]["l1_ratio"]
+    C = config["estimators"]["LogisticRegression"]["params"]["C"]
+    penalty = config["estimators"]["LogisticRegression"]["params"]["penalty"]
+    solver =  config["estimators"]["LogisticRegression"]["params"]["solver"]
 
     target = [config["base"]["target_col"]]
+    # target = np.ravel(target)
 
     train = pd.read_csv(train_data_path, sep=",")
     test = pd.read_csv(test_data_path, sep=",")
@@ -41,20 +80,20 @@ def train_and_evaluate(config_path):
     train_x = train.drop(target, axis=1)
     test_x = test.drop(target, axis=1)
 
-    lr = ElasticNet(
-        alpha=alpha, 
-        l1_ratio=l1_ratio, 
-        random_state=random_state)
+    lr = LogisticRegression(
+        C=C, 
+        penalty=penalty, 
+        solver=solver)
     lr.fit(train_x, train_y)
 
     predicted_qualities = lr.predict(test_x)
     
-    (rmse, mae, r2) = eval_metrics(test_y, predicted_qualities)
+    (accuracy, f1_score_macro, f1_score_micro, f1_score_weighted, roc_auc_score_macro, roc_auc_score_micro, roc_auc_score_weighted, precision, recall_score, error, clf_report, TPR, TNR, FNR) = eval_metrics(test_y, predicted_qualities)
 
-    print("Elasticnet model (alpha=%f, l1_ratio=%f):" % (alpha, l1_ratio))
-    print("  RMSE: %s" % rmse)
-    print("  MAE: %s" % mae)
-    print("  R2: %s" % r2)
+    print("LogisticRegression model (C=%f, penalty=%f):" % (C, penalty))
+    print("  accuracy: %s" % accuracy)
+    print("  f1_score_macro: %s" % f1_score_macro)
+    print("  roc_auc_score_macro: %s" % roc_auc_score_macro)
 
 #####################################################
     scores_file = config["reports"]["scores"]
@@ -62,16 +101,27 @@ def train_and_evaluate(config_path):
 
     with open(scores_file, "w") as f:
         scores = {
-            "rmse": rmse,
-            "mae": mae,
-            "r2": r2
+            "accuracy": accuracy,
+            "f1_score_macro": f1_score_macro,
+            "roc_auc_score_macro": roc_auc_score_macro,
+            "f1_score_micro": f1_score_micro,
+            "f1_score_weighted": f1_score_weighted,
+            "roc_auc_score_micro": roc_auc_score_micro,
+            "roc_auc_score_weighted": roc_auc_score_weighted,
+            "precision" : precision,
+            "recall_score" : recall_score,
+            "error" : error,
+            "TPR" : TPR,
+            "TNR": TNR,
+            "FNR" : FNR
         }
         json.dump(scores, f, indent=4)
 
     with open(params_file, "w") as f:
         params = {
-            "alpha": alpha,
-            "l1_ratio": l1_ratio,
+            "C": C,
+            "penalty": penalty,
+            "solver" : solver
         }
         json.dump(params, f, indent=4)
 #####################################################

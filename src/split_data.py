@@ -34,13 +34,15 @@ def split_and_saved_data(config_path):
                             'C(husbandOccupation)[T.6.0]':'occ_husb_6'})
 
 
-    y = np.ravel(y)
+    data = X
+    data['affair'] = y
+
 
 
 
 
     train, test = train_test_split(
-        df, 
+        data, 
         test_size=split_ratio, 
         random_state=random_state
         )
