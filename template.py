@@ -7,6 +7,7 @@ dirs = [
     'notebooks',
     'saved_models',
     'src'
+    'report'
 ]
 
 

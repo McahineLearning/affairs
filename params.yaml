@@ -25,9 +25,9 @@ estimators:
       solver: 'newton-cg'
 model_dir: saved_models
 
-#   reports:
-#     params: report/params.json
-#     scores: report/scores.json
-  
+reports:
+  params: srcreport/params.json
+  scores: srcreport/scores.json
+
 #   webapp_model_dir: prediction_service/model/model.joblib
   
