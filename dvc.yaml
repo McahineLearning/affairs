@@ -18,19 +18,20 @@ stages:
     - data/processed/train_data.csv
     - data/processed/test_data.csv 
 
-  # train_and_evaluate:
-  #   cmd: python src/train_and_evaluate.py --config=params.yaml
-  #   deps:
-  #   - data/processed/train_winequality.csv
-  #   - data/processed/test_winequality.csv 
-  #   - src/train_and_evaluate.py
-  #   params:
-  #   - estimators.ElasticNet.params.alpha
-  #   - estimators.ElasticNet.params.l1_ratio
-  #   metrics:
-  #   - report/scores.json:
-  #       cache: false
-  #   - report/params.json:
-  #       cache: false
-  #   outs:
-  #   - saved_models/model.joblib
+  train_and_evaluate:
+    cmd: python src/train_and_evaluate.py --config=params.yaml
+    deps:
+    - data/processed/train_data.csv
+    - data/processed/test_data.csv 
+    - src/train_and_evaluate.py
+    params:
+    - estimators.LogisticRegression.params.C
+    - estimators.LogisticRegression.params.penalty
+    - estimators.LogisticRegression.params.solver
+    metrics:
+    - srcreport/scores.json:
+        cache: false
+    - srcreport/params.json:
+        cache: false
+    outs:
+    - saved_models/model.joblib

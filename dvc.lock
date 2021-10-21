@@ -13,8 +13,8 @@ stages:
       md5: 1dffde8ed69b56fa62cd47c8618f8236
       size: 729
     - path: src/make_data.py
-      md5: b465f2072a16b17f70a607359b0ee7d9
-      size: 213
+      md5: d41d8cd98f00b204e9800998ecf8427e
+      size: 0
     outs:
     - path: data/raw/data_raw.csv
       md5: 72becb5e201e4df76ad55b872bce5a78
@@ -26,12 +26,39 @@ stages:
       md5: 72becb5e201e4df76ad55b872bce5a78
       size: 261689
     - path: src/split_data.py
-      md5: 2d8e71798ca17f1242ca55306db808ad
-      size: 2083
+      md5: f37669a30f78c08d17ea3ebc4068fc14
+      size: 2104
     outs:
     - path: data/processed/test_data.csv
-      md5: 7baae5601163a654b5c4bb5857482df1
-      size: 55089
+      md5: bc9fb54f7f6d917e9e321efd561ebd77
+      size: 96169
     - path: data/processed/train_data.csv
-      md5: 1aa22f00b9b7b927cfc53198391b5e1a
-      size: 219438
+      md5: 977b5c857db6fc867f5ae7c0f1cac9d4
+      size: 383766
+  train_and_evaluate:
+    cmd: python src/train_and_evaluate.py --config=params.yaml
+    deps:
+    - path: data/processed/test_data.csv
+      md5: bc9fb54f7f6d917e9e321efd561ebd77
+      size: 96169
+    - path: data/processed/train_data.csv
+      md5: 977b5c857db6fc867f5ae7c0f1cac9d4
+      size: 383766
+    - path: src/train_and_evaluate.py
+      md5: a6bb67c4e67f1e4a347c11f3f873e72b
+      size: 5906
+    params:
+      params.yaml:
+        estimators.LogisticRegression.params.C: 0.1
+        estimators.LogisticRegression.params.penalty: l2
+        estimators.LogisticRegression.params.solver: newton-cg
+    outs:
+    - path: saved_models/model.joblib
+      md5: 42b5b84801832570f09b9385e69c3047
+      size: 1542
+    - path: srcreport/params.json
+      md5: 180f3ef5b8d166c8ebe9e52537d4aaba
+      size: 68
+    - path: srcreport/scores.json
+      md5: 5e32258b00bc4e1ba422e3bb7c940b15
+      size: 520
