@@ -1,108 +1,130 @@
-{% extends 'base.html' %}
+<html>
+  <head>
+    <style>
+      body{
+        background-color: #404040;
+        font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+      }
+      div.form{
+        box-shadow: 2px 2px 30px #1a1a1a;
+        width: 45vw;
+        background-color: #bfbfbf;
+        text-align: center;
+        border-left-color: #a6a6a6;
+      }
+      table{
+        font-size: 10px;
+        box-shadow: 2px 2px 30px #1a1a1a;
+        padding: 15px;
+        background-color: #bfbfbf;
+        width: 420px;
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+        border-top-style: solid;
+        border-bottom-style: solid;
+        border-color: #ffff00;
+        border-top-width: 5px;
+        border-bottom-width: 5px;
+      }
+      form{
+        border-left-style: solid;
+        border-color: #ffff00;
+        border-left-width: 5px;
+        padding: 15px;
+      }
+      h1{
+        color: #f2f2f2;
+        text-align: center;
+      }
+      input[type=text]{
+        text-align: center;
+        width: 200px;
+        height: 30px;
+        border: 0px;
+      }
+      input[type=submit]{
+        background-color: #ffff00;
+        width: 90px;
+        height: 30px;
+        border: 0px;
+      }
+      input[type=submit]:hover{
+        box-shadow: 2px 4px 20px #666666;
+      }
+      span{
+        color: #ffffff;
+      }
+      td{
+        color: #595959;
+      }
+      td.heading{
+        width: 50px;
+      }
 
-{% block title %}
-WineQuality
-{% endblock title %}
-
-
-{% block custom_css %}
-<!-- Custom CSS -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-{% endblock custom_css %}
-
-
-{% block body %}
-<!-- nav bar -->
-
-<nav class="navbar navbar-expand-lg navbar-light shadow fixed-top" style="background-color: #e3f2fd;">
-    <a class="navbar-brand" href="/">WineQualityPrediction</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://github.com/c17hawke/dvc-plus-cml-test">source code</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-<div>
-    <!-- nav bar ends -->
-
-    <div class="container-fluid masthead">
-        <br>
-        <br>
-        <br>
-        <br>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <form method="POST">
-                        <!-- Input block-->
-                        <div class="form-group">
-                            <label for="translation">
-                                <blockquote class="blockquote">
-                                    <p class="mb-2">Enter the details as indicated:</p>
-                                </blockquote>
-                            </label>
-                            <textarea class="form-control" name="fixed_acidity" rows="1"
-                                placeholder="fixed acidity expected range 4.6 to 15.9"></textarea>
-                            <textarea class="form-control" name="volatile_acidity" rows="1"
-                                placeholder="volatile acidity expected range 0.12 to 1.58"></textarea>
-                            <textarea class="form-control" name="citric_acid" rows="1"
-                                placeholder="citric acid expected range 0.0 to 1.0"></textarea>
-                            <textarea class="form-control" name="residual_sugar" rows="1"
-                                placeholder="residual sugar expected range 0.9 to 15.5"></textarea>
-                            <textarea class="form-control" name="chlorides" rows="1" 
-                                placeholder="chlorides expected range 0.012 to 0.611"></textarea>
-                            <textarea class="form-control" name="free_sulfur_dioxide" rows="1"
-                                placeholder="free sulfur dioxide expected range 1.0 to 72.0"></textarea>
-                            <textarea class="form-control" name="total_sulfur_dioxide" rows="1"
-                                placeholder="total sulfur dioxide expected range 6.0 to 289.0"></textarea>
-                            <textarea class="form-control" name="density" rows="1" 
-                                placeholder="density expected range 0.99007 to 1.00369"></textarea>
-                            <textarea class="form-control" name="pH" rows="1" 
-                                placeholder="pH expected range 2.74 to 4.01"></textarea>
-                            <textarea class="form-control" name="sulphates" rows="1" 
-                                placeholder="sulphates expected range 0.33 to 2.0"></textarea>
-                            <textarea class="form-control" name="alcohol" rows="1" 
-                                placeholder="alcohol expected range 8.4 to 14.9"></textarea>
-
-                        </div>
-
-                        <!-- Select output language here. -->
-                        <div class="form-group">
-                        </div>
-                        <button type="submit" class="btn btn-primary mb-2">Predict</button></br>
-                        </br>
-                    </form>
-                    <!-- Translated text returned by the Translate API is rendered here. -->
-                </div>
-                <div class="col">
-                    <form>
-                        <div class="form-group">
-                            <label for="translation-result">
-
-                                <blockquote class="blockquote">
-                                    <p class="mb-2">Prediction:</p>
-                                </blockquote>
-
-                            </label>
-                            <textarea readonly class="form-control" id="exTextarea" rows="5">{{ response }}</textarea>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        {% endblock body %}
-
-        {% block custom_js %}
-        <!-- Custom JS -->
-        <script src="{{ url_for('static', filename='script/index.js') }}"></script>
-        {% endblock custom_js %}
+    
+    </style>
+    <style>
+        body {
+          background-image: url('todd-kent-178j8tJrNlc-unsplash.jpg');
+          background-repeat: no-repeat;
+          background-size: cover;
+          opacity: 0.8;
+        }
+        </style>
+    <title>Affaris Project</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <h1>Affairs Predictor</h1>
+    
+    <center>
+    <div class="form">
+    <form action="/predict" method="post">
+      Enter values to predict value of whether they are cheating or not..<br><br>
+      <textarea class="form-control" name="rateMarriage" rows="1"
+                                placeholder="rateMarriage expected range 1.0 to 5.0"></textarea>
+    <textarea class="form-control" name="age" rows="1"
+    placeholder="age expected range 17.0 to 42.0"></textarea>
+    <textarea class="form-control" name="yearsMarried" rows="1"
+    placeholder="yearsMarried expected range 0.5 to 23.0"></textarea>
+    <textarea class="form-control" name="children" rows="1"
+    placeholder="children expected range 1 to 6"></textarea>
+    <textarea class="form-control" name="religious" rows="1"
+    placeholder="religious expected range 1 to 4"></textarea>
+    <textarea class="form-control" name="educ" rows="1"
+    placeholder="educ expected range 9 to 20"></textarea>
+    <textarea class="form-control" name="occupation" rows="1"
+    placeholder="occupation expected range 1 to 6"></textarea>
+    <textarea class="form-control" name="husbandOccupation" rows="1"
+    placeholder="husbandOccupation expected range 1 to 6"></textarea>
+      <!-- <input type="text" name="rateMarriage" placeholder="rateMarriage" autofocus required><br><br> -->
+      <!-- <input type="text" name="age" placeholder="age" required><br><br>
+      <input type="text" name="yearsMarried" placeholder="yearsMarried" required><br><br>
+      <input type="text" name="children" placeholder="children" required><br><br>
+      <input type="text" name="religious" placeholder="religious" required><br><br>
+      <input type="text" name="age" placeholder="AGE" required><br><br>
+      <input type="text" name="educ" placeholder="educ" required><br><br>
+      <input type="text" name="occupation" placeholder="occupation" required><br><br>
+      <input type="text" name="husbandOccupation" placeholder="husbandOccupation" required><br><br>> -->
+      <input type="submit" value="Predict">
+    </form>
+  </div>
+</center>
+<br>
+<br>
+<div class = "legend">
+  <table>
+<tr><td class = "heading">rateMarriage :</td><td>ratemarriage</td></tr><br>
+<tr><td class = "heading">age :</td><td>age</td></tr><br>
+<tr><td class = "heading">yearsMarried :</td><td>no of years married</td></tr><br>
+<tr><td class = "heading">children :</td><td>do they have children</td></tr><br>
+<tr><td class = "heading">religious :</td><td>is she religious</td></tr><br>
+<tr><td class = "heading">educ :</td><td>education of wife</td></tr><br>
+<tr><td class = "heading">occupation :</td><td>occupation of wife</td></tr><br>
+<tr><td class = "heading">husbandOccupation :</td><td>occupation of husband</td></tr><br>
+</table>
+</div>
+</body>
+</html>
