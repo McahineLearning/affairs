@@ -12,3 +12,4 @@ dvc
 pytest
 tox
 gunicorn
+mlflow
