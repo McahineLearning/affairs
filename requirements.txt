@@ -11,3 +11,4 @@ flask
 dvc
 pytest
 tox
+gunicorn
