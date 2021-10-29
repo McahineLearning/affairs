@@ -72,7 +72,7 @@
           opacity: 0.8;
         }
         </style>
-    <title>Affaris Project</title>
+    <title>Affairs Project</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
@@ -82,32 +82,15 @@
     <center>
     <div class="form">
     <form action="/predict" method="post">
-      Enter values to predict value of whether they are cheating or not..<br><br>
-      <textarea class="form-control" name="rateMarriage" rows="1"
-                                placeholder="rateMarriage expected range 1.0 to 5.0"></textarea>
-    <textarea class="form-control" name="age" rows="1"
-    placeholder="age expected range 17.0 to 42.0"></textarea>
-    <textarea class="form-control" name="yearsMarried" rows="1"
-    placeholder="yearsMarried expected range 0.5 to 23.0"></textarea>
-    <textarea class="form-control" name="children" rows="1"
-    placeholder="children expected range 1 to 6"></textarea>
-    <textarea class="form-control" name="religious" rows="1"
-    placeholder="religious expected range 1 to 4"></textarea>
-    <textarea class="form-control" name="educ" rows="1"
-    placeholder="educ expected range 9 to 20"></textarea>
-    <textarea class="form-control" name="occupation" rows="1"
-    placeholder="occupation expected range 1 to 6"></textarea>
-    <textarea class="form-control" name="husbandOccupation" rows="1"
-    placeholder="husbandOccupation expected range 1 to 6"></textarea>
-      <!-- <input type="text" name="rateMarriage" placeholder="rateMarriage" autofocus required><br><br> -->
-      <!-- <input type="text" name="age" placeholder="age" required><br><br>
+      Enter values to predict value of Features<br><br>
+      <input type="text" name="rateMarriage" placeholder="rateMarriage" autofocus required><br><br>
+      <input type="text" name="age" placeholder="age" required><br><br>
       <input type="text" name="yearsMarried" placeholder="yearsMarried" required><br><br>
       <input type="text" name="children" placeholder="children" required><br><br>
       <input type="text" name="religious" placeholder="religious" required><br><br>
-      <input type="text" name="age" placeholder="AGE" required><br><br>
       <input type="text" name="educ" placeholder="educ" required><br><br>
       <input type="text" name="occupation" placeholder="occupation" required><br><br>
-      <input type="text" name="husbandOccupation" placeholder="husbandOccupation" required><br><br>> -->
+      <input type="text" name="husbandOccupation" placeholder="husbandOccupation" required><br><br>
       <input type="submit" value="Predict">
     </form>
   </div>
@@ -116,14 +99,18 @@
 <br>
 <div class = "legend">
   <table>
-<tr><td class = "heading">rateMarriage :</td><td>ratemarriage</td></tr><br>
-<tr><td class = "heading">age :</td><td>age</td></tr><br>
-<tr><td class = "heading">yearsMarried :</td><td>no of years married</td></tr><br>
-<tr><td class = "heading">children :</td><td>do they have children</td></tr><br>
-<tr><td class = "heading">religious :</td><td>is she religious</td></tr><br>
-<tr><td class = "heading">educ :</td><td>education of wife</td></tr><br>
-<tr><td class = "heading">occupation :</td><td>occupation of wife</td></tr><br>
-<tr><td class = "heading">husbandOccupation :</td><td>occupation of husband</td></tr><br>
+<tr><td class = "heading">CRIM :</td><td>per capita crime rate by town</td></tr><br>
+<tr><td class = "heading">INDUS :</td><td>proportion of non-retail business acres per town</td></tr><br>
+<tr><td class = "heading">CHAS :</td><td>Charles River dummy variable (= 1 if tract bounds river; 0 otherwise)</td></tr><br>
+<tr><td class = "heading">NOX :</td><td>nitric oxides concentration (parts per 10 million)</td></tr><br>
+<tr><td class = "heading">RM :</td><td>average number of rooms per dwelling</td></tr><br>
+<tr><td class = "heading">AGE :</td><td>proportion of owner-occupied units built prior to 1940</td></tr><br>
+<tr><td class = "heading">DIS :</td><td>weighted distances to five Boston employment centres</td></tr><br>
+<tr><td class = "heading">RAD :</td><td>index of accessibility to radial highways</td></tr><br>
+<tr><td class = "heading">TAX :</td><td>full-value property-tax rate per $10,000</td></tr><br>
+<tr><td class = "heading">PTRATIO :</td><td>pupil-teacher ratio by town</td></tr><br>
+<tr><td class = "heading">B :</td><td>1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town</td></tr><br>
+<tr><td class = "heading">LSTAT :</td><td>%age lower status of the population</td></tr><br>
 </table>
 </div>
 </body>

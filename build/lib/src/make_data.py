@@ -11,4 +11,4 @@ if not os.path.exists(outdir):
 
 fullname = os.path.join(outdir, outname)    
 
-df.to_csv(fullname, index = False)
+df.to_csv(fullname)

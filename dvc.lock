@@ -4,8 +4,8 @@ stages:
     cmd: python src/load_data.py --config=params.yaml
     deps:
     - path: data_given/data.csv
-      md5: 9709468543c8d47c6f3ff97ceb355208
-      size: 261687
+      md5: c7f47156f8aefd8507a317b8aa35c886
+      size: 292408
     - path: src/get_data.py
       md5: 5e05d29746fb39fc3aab7fb947b92c35
       size: 637
@@ -13,18 +13,18 @@ stages:
       md5: 1dffde8ed69b56fa62cd47c8618f8236
       size: 729
     - path: src/make_data.py
-      md5: d41d8cd98f00b204e9800998ecf8427e
-      size: 0
+      md5: 527e68faa616bee1ebcda62abb68e0a5
+      size: 314
     outs:
     - path: data/raw/data_raw.csv
-      md5: 72becb5e201e4df76ad55b872bce5a78
-      size: 261689
+      md5: 525a1926aa76ef666674a486bc2e335c
+      size: 292420
   split_data:
     cmd: python src/split_data.py --config=params.yaml
     deps:
     - path: data/raw/data_raw.csv
-      md5: 72becb5e201e4df76ad55b872bce5a78
-      size: 261689
+      md5: 525a1926aa76ef666674a486bc2e335c
+      size: 292420
     - path: src/split_data.py
       md5: f37669a30f78c08d17ea3ebc4068fc14
       size: 2104
@@ -54,7 +54,7 @@ stages:
         estimators.LogisticRegression.params.solver: newton-cg
     outs:
     - path: saved_models/model.joblib
-      md5: 42b5b84801832570f09b9385e69c3047
+      md5: 06554107be23e9ad32362c9919922ed8
       size: 1542
     - path: srcreport/params.json
       md5: 180f3ef5b8d166c8ebe9e52537d4aaba

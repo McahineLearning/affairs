@@ -29,5 +29,5 @@ reports:
   params: srcreport/params.json
   scores: srcreport/scores.json
 
-#   webapp_model_dir: prediction_service/model/model.joblib
+webapp_model_dir: prediction_service/model/model.joblib
   
